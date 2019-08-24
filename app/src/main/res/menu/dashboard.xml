@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_addpost"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/add_post"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_updatedetails"
         android:orderInCategory="100"
         android:title="Update Details"

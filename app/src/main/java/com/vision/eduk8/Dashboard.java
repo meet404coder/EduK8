@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 
 public class Dashboard extends AppCompatActivity
@@ -68,7 +70,7 @@ public class Dashboard extends AppCompatActivity
 
     private final static int QRCODEWIDH = 500;
 
-
+    private ListView mFeed;
 
 //    ListView poll_lv,meet_lv,req_lv,news_lv,mvp_lv;
 //    List<MeetData> meetDataList = new LinkedList<>();
@@ -88,28 +90,40 @@ public class Dashboard extends AppCompatActivity
 
 
         prefManager = new PrefManager(Dashboard.this);
-        waitprg = (ProgressBar) findViewById(R.id.waitprogressbar);
-        waitprg.getIndeterminateDrawable().setColorFilter(0xFF000000, android.graphics.PorterDuff.Mode.MULTIPLY);
-        refreshQrBttn = (Button) findViewById(R.id.refreshqr_bttn);
-
-        qrView = (ImageView) findViewById(R.id.qrview);
-
-        mAuth = FirebaseAuth.getInstance();
-        waitprg.setVisibility(View.VISIBLE);
+//        waitprg = (ProgressBar) findViewById(R.id.waitprogressbar);
+//        waitprg.getIndeterminateDrawable().setColorFilter(0xFF000000, android.graphics.PorterDuff.Mode.MULTIPLY);
+//        refreshQrBttn = (Button) findViewById(R.id.refreshqr_bttn);
+//
+//        qrView = (ImageView) findViewById(R.id.qrview);
+//
+//        mAuth = FirebaseAuth.getInstance();
+//        waitprg.setVisibility(View.VISIBLE);
 
         prefManager.setFirstTimeLaunch(false);
 
 
+        mFeed = (ListView) findViewById(R.id.feed);
+
+        ArrayList<FeedItemData> mFeedList = new ArrayList<>();
+
+        String[] tag = {"Lol", "Tmp"};
+        FeedItemData tmp = new FeedItemData("title", "body bla bla bla", "Taau Ji", tag, 2 );
+
+        mFeedList.add(tmp);
+
+        FeedAdapter mFeedAdapter =  new FeedAdapter(this, mFeedList);
+
+        mFeed.setAdapter(mFeedAdapter);
 //        poll_lv = (ListView) findViewById(R.id.polling_list);
 //        meet_lv = (ListView) findViewById(R.id.meet_list_view);
 //        req_lv = (ListView) findViewById(R.id.req_list_view);
 //        news_lv = (ListView) findViewById(R.id.news_list_view);
 //        mvp_lv = (ListView) findViewById(R.id.mvp_list_view);
 
-        progressDialog = new ProgressDialog(Dashboard.this);
-        progressDialog.setTitle("Contacting Servers...");
-        progressDialog.setMessage("Please wait while we Contact our Database...");
-        progressDialog.setCancelable(false);
+//        progressDialog = new ProgressDialog(Dashboard.this);
+//        progressDialog.setTitle("Contacting Servers...");
+//        progressDialog.setMessage("Please wait while we Contact our Database...");
+//        progressDialog.setCancelable(false);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -146,8 +160,8 @@ public class Dashboard extends AppCompatActivity
 
         Toast.makeText(Dashboard.this,"IS MEMBER: "+isMember,Toast.LENGTH_LONG).show();
 
-        meetingLoaderThread.start();
-        pollingLoaderThread.start();
+//        meetingLoaderThread.start();
+//        pollingLoaderThread.start();
 
         /*
         getHW();
@@ -223,6 +237,10 @@ public class Dashboard extends AppCompatActivity
         if (id == R.id.action_feedback) {
             startActivity(new Intent(Dashboard.this,Feedback.class));
             return true;
+        }
+
+        if (id == R.id.action_addpost) {
+           // startActivity(new Intent(Dashboard.this, ));
         }
 
         return super.onOptionsItemSelected(item);

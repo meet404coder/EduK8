@@ -60,22 +60,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "692179434440-8tudllf19aho6i2p995rgpvcpn37rr4c.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.vision.eduk8",
-            "certificate_hash": "0735480315b1f1c8bdc208879c9dedfab23b3998"
-          }
-        },
-        {
-          "client_id": "692179434440-tev7hm3pfjp0pap6meflp3trpt6r8dsv.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.vision.eduk8",
-            "certificate_hash": "bbf84a8afc28d501e615f3a10d0022e3c36a3aea"
-          }
-        },
-        {
           "client_id": "692179434440-r86imhhhm4qfs62t0pflefn8hut69kj2.apps.googleusercontent.com",
           "client_type": 3
         }
