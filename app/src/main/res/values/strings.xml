@@ -30,6 +30,7 @@
     <string name="title_activity_polling">PollingActivity</string>
 
     <string name="title_activity_call_meet">CallMeet</string>
+    <string name="add_post">Add Post</string>
 
     <string-array name="hostelname">
         <item>Amber Hostel</item>
