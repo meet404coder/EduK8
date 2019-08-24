@@ -69,20 +69,50 @@
         android:id="@+id/rel5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/rel6"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:background="@drawable/shadow_for_list_item"
+        android:paddingBottom="15dp"
+        android:paddingTop="5dp">
+        <TextView
+            android:id="@+id/tag_info_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter relevant tags:"/>
+
+        <EditText
+            android:id="@+id/enterTags"
+            android:layout_below="@+id/tag_info_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="69dp"
+            tools:layout_editor_absoluteY="268dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel6"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/rel4"
         android:layout_marginTop="10dp"
         android:background="@drawable/shadow_for_list_item"
         android:paddingBottom="15dp"
         android:paddingTop="5dp">
     <TextView
-        android:id="@+id/tag_info_tv"
+        android:id="@+id/title_info_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter relevant tags:"/>
+        android:text="Enter relevant title for the notes:"/>
 
     <EditText
-        android:id="@+id/enterTags"
-        android:layout_below="@+id/tag_info_tv"
+        android:id="@+id/enterTitle"
+        android:layout_below="@+id/title_info_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -92,6 +122,8 @@
         tools:layout_editor_absoluteY="268dp" />
 
     </RelativeLayout>
+
+
 
     <Button
         android:id="@+id/submit"
