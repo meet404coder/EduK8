@@ -27,6 +27,10 @@
     <string name="title_activity_report_attendence">ReportAttendence</string>
     <string name="title_activity_display_tracker">Map</string>
 
+    <string name="title_activity_polling">PollingActivity</string>
+
+    <string name="title_activity_call_meet">CallMeet</string>
+
     <string-array name="hostelname">
         <item>Amber Hostel</item>
     </string-array>
@@ -35,7 +39,6 @@
         <item>Member</item>
         <item>Core Team</item>
     </string-array>
-
     <string-array name="deplist">
         <item>Applied Chemistry</item>
         <item>Applied Geology</item>
@@ -57,7 +60,6 @@
         <item>Petroleum Engineering</item>
 
     </string-array>
-
     <string-array name="feedback_topic">
         <item>Breakfast</item>
         <item>Lunch</item>
@@ -65,7 +67,5 @@
         <item>Dinner</item>
         <item>General/Management</item>
     </string-array>
-    <string name="title_activity_polling">PollingActivity</string>
-    <string name="title_activity_call_meet">CallMeet</string>
 
 </resources>

@@ -262,6 +262,7 @@ public class LoginActivity extends AppCompatActivity{
 
                         @Override
                         public void onVerificationFailed(FirebaseException e) {
+                            Log.e("Error:", e.getMessage());
                             Toast.makeText(LoginActivity.this, "Verification Failed!", Toast.LENGTH_SHORT).show();
                         }
 
