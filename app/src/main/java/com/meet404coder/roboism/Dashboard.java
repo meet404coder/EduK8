@@ -74,9 +74,9 @@ public class Dashboard extends AppCompatActivity
 
 
 
-    ListView poll_lv,meet_lv,req_lv,news_lv,mvp_lv;
-    List<MeetData> meetDataList = new LinkedList<>();
-    List<PollDrafter> pollDataList = new LinkedList<>();
+//    ListView poll_lv,meet_lv,req_lv,news_lv,mvp_lv;
+//    List<MeetData> meetDataList = new LinkedList<>();
+//    List<PollDrafter> pollDataList = new LinkedList<>();
 
 
 
@@ -104,11 +104,11 @@ public class Dashboard extends AppCompatActivity
         prefManager.setFirstTimeLaunch(false);
 
 
-        poll_lv = (ListView) findViewById(R.id.polling_list);
-        meet_lv = (ListView) findViewById(R.id.meet_list_view);
-        req_lv = (ListView) findViewById(R.id.req_list_view);
-        news_lv = (ListView) findViewById(R.id.news_list_view);
-        mvp_lv = (ListView) findViewById(R.id.mvp_list_view);
+//        poll_lv = (ListView) findViewById(R.id.polling_list);
+//        meet_lv = (ListView) findViewById(R.id.meet_list_view);
+//        req_lv = (ListView) findViewById(R.id.req_list_view);
+//        news_lv = (ListView) findViewById(R.id.news_list_view);
+//        mvp_lv = (ListView) findViewById(R.id.mvp_list_view);
 
         progressDialog = new ProgressDialog(Dashboard.this);
         progressDialog.setTitle("Contacting Servers...");
@@ -250,13 +250,13 @@ public class Dashboard extends AppCompatActivity
                         progressDialog.show();
                         CheckIsAdmin();
                     }else if(which ==1){ //Compile Data is selected
-                        startActivity(new Intent(Dashboard.this,DataCompileActivity.class));
+//                        startActivity(new Intent(Dashboard.this,DataCompileActivity.class));
                     }else if(which ==2){ //Compile Data is selected
-                        startActivity(new Intent(Dashboard.this,ReadBTandMarkAttendance.class));
+//                       startActivity(new Intent(Dashboard.this,ReadBTandMarkAttendance.class));
                     }else if(which == 3){
-                        startActivity(new Intent(Dashboard.this,PollingActivity.class));
+//                        startActivity(new Intent(Dashboard.this,PollingActivity.class));
                     }else if(which == 4){
-                        startActivity(new Intent(Dashboard.this,MeetManagement.class));
+//                        startActivity(new Intent(Dashboard.this,MeetManagement.class));
                     }
                 }
             });
@@ -266,7 +266,7 @@ public class Dashboard extends AppCompatActivity
         } else if (id == R.id.nav_profile) {
             startActivity(new Intent(Dashboard.this, E_IDCard.class));
         } else if (id == R.id.nav_slideshow) {
-            startActivity(new Intent(Dashboard.this, MessOffOption.class));
+//            startActivity(new Intent(Dashboard.this, MessOffOption.class));
         } else if (id == R.id.nav_logout) {
             android.app.AlertDialog.Builder builder;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -467,7 +467,7 @@ public class Dashboard extends AppCompatActivity
                         if (adminUserColabData.isadmin) {
                             //user is Admin, Open Scanner
                             progressDialog.dismiss();
-                            startActivity(new Intent(Dashboard.this, QrScanningActivity.class));
+//                            startActivity(new Intent(Dashboard.this, QrScanningActivity.class));
                         } else {
                             progressDialog.dismiss();
                             Toast.makeText(Dashboard.this, "You Are Not Authorised!", Toast.LENGTH_LONG).show();
@@ -619,73 +619,73 @@ public class Dashboard extends AppCompatActivity
     Thread meetingLoaderThread = new Thread(new Runnable() {
         @Override
         public void run() {
-            meetDataList.clear();
-            DatabaseReference db = FirebaseDatabase.getInstance().getReference(Config.MeetsRef);
-            db.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    meetDataList.clear();
-                    for(DataSnapshot ds1:dataSnapshot.getChildren()) {
-                        for(DataSnapshot ds:ds1.getChildren()) {
-                            MeetData meetData = ds.getValue(MeetData.class);
-                            if (!meetDataList.contains(meetData)) {
-                                meetDataList.add(meetData);
-                            }
-                        }
-                    }
-
-                    //Done reading meets data, Proceed to use this info
-                    DoneLoadingMeetData();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
+//            meetDataList.clear();
+//            DatabaseReference db = FirebaseDatabase.getInstance().getReference(Config.MeetsRef);
+//            db.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    meetDataList.clear();
+//                    for(DataSnapshot ds1:dataSnapshot.getChildren()) {
+//                        for(DataSnapshot ds:ds1.getChildren()) {
+//                            MeetData meetData = ds.getValue(MeetData.class);
+//                            if (!meetDataList.contains(meetData)) {
+//                                meetDataList.add(meetData);
+//                            }
+//                        }
+//                    }
+//
+//                    //Done reading meets data, Proceed to use this info
+//                    DoneLoadingMeetData();
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
         }
     });
-
-    void DoneLoadingMeetData(){
-        for (int i = 0; i < meetDataList.size(); i++) {
-            System.out.println(">>>> DASH MEET DATA: " + meetDataList.get(i).meetID);
-        }
-    }
+//
+//    void DoneLoadingMeetData(){
+//        for (int i = 0; i < meetDataList.size(); i++) {
+//            System.out.println(">>>> DASH MEET DATA: " + meetDataList.get(i).meetID);
+//        }
+//    }
 
 
     Thread pollingLoaderThread = new Thread(new Runnable() {
         @Override
         public void run() {
-            pollDataList.clear();
-            DatabaseReference db = FirebaseDatabase.getInstance().getReference(Config.PollingDrafterRef);
-            db.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    pollDataList.clear();
-                    for(DataSnapshot ds1:dataSnapshot.getChildren()) {
-                        for(DataSnapshot ds:ds1.getChildren()) {
-                            PollDrafter pollData = ds.getValue(PollDrafter.class);
-                            if (!pollDataList.contains(pollData)) {
-                                pollDataList.add(pollData);
-                            }
-                        }
-                    }
-
-                    //Done reading meets data, Proceed to use this info
-                    DoneLoadingPollData();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
+//            pollDataList.clear();
+//            DatabaseReference db = FirebaseDatabase.getInstance().getReference(Config.PollingDrafterRef);
+//            db.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    pollDataList.clear();
+//                    for(DataSnapshot ds1:dataSnapshot.getChildren()) {
+//                        for(DataSnapshot ds:ds1.getChildren()) {
+//                            PollDrafter pollData = ds.getValue(PollDrafter.class);
+//                            if (!pollDataList.contains(pollData)) {
+//                                pollDataList.add(pollData);
+//                            }
+//                        }
+//                    }
+//
+//                    //Done reading meets data, Proceed to use this info
+//                    DoneLoadingPollData();
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
         }
     });
 
-    void DoneLoadingPollData(){
-        for (int i = 0; i < pollDataList.size(); i++) {
-            System.out.println(">>>> DASH POLL DATA: " + pollDataList.get(i).quesID);
-        }
-    }
+//    void DoneLoadingPollData(){
+//        for (int i = 0; i < pollDataList.size(); i++) {
+//            System.out.println(">>>> DASH POLL DATA: " + pollDataList.get(i).quesID);
+//        }
+//    }
 }
