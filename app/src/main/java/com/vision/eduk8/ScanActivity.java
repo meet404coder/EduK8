@@ -81,7 +81,7 @@ public class ScanActivity extends AppCompatActivity {
             TextRecognizer textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
 
             Frame imageFrame = new Frame.Builder()
-                    .setBitmap(photo)                 // your image bitmap
+                    .setBitmap(photo)
                     .build();
 
             String imageText = "";
