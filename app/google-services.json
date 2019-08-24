@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "692179434440-dvic45phvonntgqhev5lvv641vl4icn5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.meet404coder.roboism",
+            "certificate_hash": "0735480315b1f1c8bdc208879c9dedfab23b3998"
+          }
+        },
+        {
           "client_id": "692179434440-jmf99hoj7i6t5vosr0smgkj0le0klh6n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -22,6 +30,35 @@
             "certificate_hash": "bbf84a8afc28d501e615f3a10d0022e3c36a3aea"
           }
         },
+        {
+          "client_id": "692179434440-r86imhhhm4qfs62t0pflefn8hut69kj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMZqj5Clxd8i8c4p5FiHYkN6_O1I9eCuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692179434440-r86imhhhm4qfs62t0pflefn8hut69kj2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692179434440:android:c0adcb844ecf7696",
+        "android_client_info": {
+          "package_name": "com.vision.eduk8"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "692179434440-r86imhhhm4qfs62t0pflefn8hut69kj2.apps.googleusercontent.com",
           "client_type": 3
