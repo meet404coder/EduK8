@@ -34,7 +34,7 @@ public class ProfileView extends AppCompatActivity {
     Button bttn_CreditDetails;
 
     UserProfile userData;
-    MessOffData messOffDataObj;
+//    MessOffData messOffDataObj;
 
 
     ProgressDialog progressDialog;
@@ -50,7 +50,7 @@ public class ProfileView extends AppCompatActivity {
         setContentView(R.layout.activity_profile_view);
 
         userData = new UserProfile();
-        messOffDataObj = new MessOffData();
+//        messOffDataObj = new MessOffData();
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final String uid = mAuth.getCurrentUser().getUid();
@@ -80,22 +80,22 @@ public class ProfileView extends AppCompatActivity {
                 int keyCount = 0;
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     if (ds.getKey().equalsIgnoreCase("uid")) {
-                        messOffDataObj.uid = ds.getValue().toString();
+//                        messOffDataObj.uid = ds.getValue().toString();
                         keyCount++;
                     } else if (ds.getKey().equalsIgnoreCase("date")) {
-                        messOffDataObj.date = ds.getValue().toString();
+//                        messOffDataObj.date = ds.getValue().toString();
                         keyCount++;
                     } else if (ds.getKey().equalsIgnoreCase("messOfData")) {
-                        messOffDataObj.messOfData = ds.getValue().toString();
+//                        messOffDataObj.messOfData = ds.getValue().toString();
                         keyCount++;
                     } else if (ds.getKey().equalsIgnoreCase("extras")) {
-                        messOffDataObj.extras = ds.getValue().toString();
+//                        messOffDataObj.extras = ds.getValue().toString();
                         keyCount++;
                     } else if (ds.getKey().equalsIgnoreCase("creditPending")) {
-                        messOffDataObj.creditPending = ds.getValue().toString();
+//                        messOffDataObj.creditPending = ds.getValue().toString();
                         keyCount++;
                     } else if (ds.getKey().equalsIgnoreCase("status")) {
-                        messOffDataObj.status = ds.getValue().toString();
+//                        messOffDataObj.status = ds.getValue().toString();
                         keyCount++;
                     }
 
@@ -118,19 +118,19 @@ public class ProfileView extends AppCompatActivity {
                                 messOffDataObj.date);
                                 */
 
-                        try {
-
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                            Date fetchedMessOffDate = simpleDateFormat.parse(messOffDataObj.date);
-                            Date today = new Date(server_epoch);
-
-                            if (fetchedMessOffDate.before(today)) {
-                                messOffDataObj.status = Config.DatePassed;
-                                mMessOffRef.child(uid).child(messOffDataObj.date.replace("/", "-")).setValue(messOffDataObj);
-                            }
-                        } catch (ParseException e) {
-
-                        }
+//                        try {
+//
+//                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+////                            Date fetchedMessOffDate = simpleDateFormat.parse(messOffDataObj.date);
+//                            Date today = new Date(server_epoch);
+//
+//                            if (fetchedMessOffDate.before(today)) {
+////                                messOffDataObj.status = Config.DatePassed;
+////                                mMessOffRef.child(uid).child(messOffDataObj.date.replace("/", "-")).setValue(messOffDataObj);
+//                            }
+//                        } catch (ParseException e) {
+//
+//                        }
 
                     }
                 }
@@ -232,8 +232,8 @@ public class ProfileView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent ViewDetails = new Intent(ProfileView.this,CreditListPopulate.class);
-                startActivity(ViewDetails);
+//                Intent ViewDetails = new Intent(ProfileView.this,CreditListPopulate.class);
+//                startActivity(ViewDetails);
             }
         });
 
