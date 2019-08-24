@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RoboISM</string>
+    <string name="app_name">EduK8</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
