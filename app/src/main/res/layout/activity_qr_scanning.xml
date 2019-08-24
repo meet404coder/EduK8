@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meet404coder.roboism.QrScanningActivity">
+    tools:context="com.vision.eduk8.QrScanningActivity">
 
     <RelativeLayout
         android:id="@+id/qrpreview"

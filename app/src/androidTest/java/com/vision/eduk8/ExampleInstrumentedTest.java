@@ -1,4 +1,4 @@
-package com.meet404coder.roboism;
+package com.vision.eduk8;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.meet404coder.messmaestro", appContext.getPackageName());
+        assertEquals("com.vision.messmaestro", appContext.getPackageName());
     }
 }

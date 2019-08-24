@@ -1,8 +1,6 @@
-package com.meet404coder.roboism;
+package com.vision.eduk8;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ComponentCallbacks2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

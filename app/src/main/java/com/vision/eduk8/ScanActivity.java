@@ -1,4 +1,4 @@
-package com.meet404coder.roboism;
+package com.vision.eduk8;
 
 import android.Manifest;
 import android.app.Activity;
@@ -11,6 +11,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.Frame;
@@ -26,10 +29,16 @@ public class ScanActivity extends AppCompatActivity {
 
     Bitmap photo = null;
 
+    EditText scannedText;
+    Button submit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+
+        scannedText = (EditText) findViewById(R.id.scannedText);
+        submit = (Button) findViewById(R.id.submit);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
@@ -84,13 +93,20 @@ public class ScanActivity extends AppCompatActivity {
                 imageText = textBlock.getValue();
             }
 
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Notes");
+            final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Notes");
 
-            String uid = null;
-            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            }
-            ref.child(uid).child(Calendar.getInstance().getTime().toString()).setValue(imageText);
+            scannedText.setText(imageText);
+
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String uid = null;
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    }
+                    ref.child(uid).child(Calendar.getInstance().getTime().toString()).setValue(scannedText.getText().toString());
+                }
+            });
 
             Toast.makeText(this, imageText, Toast.LENGTH_SHORT).show();
         }
