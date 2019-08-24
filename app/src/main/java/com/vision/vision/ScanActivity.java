@@ -81,6 +81,8 @@ public class ScanActivity extends AppCompatActivity {
                 imageText = textBlock.getValue();
             }
 
+
+
             Toast.makeText(this, imageText, Toast.LENGTH_SHORT).show();
         }
     }
