@@ -9,7 +9,8 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Meal Switch" />
+            android:title="Meal Switch"
+            android:visible="false" />
     </group>
 
     <item android:title="Credits">
@@ -17,7 +18,8 @@
             <item
                 android:id="@+id/nav_credits"
                 android:icon="@drawable/ic_menu_manage"
-                android:title="App Developer" />
+                android:title="App Developer"
+                android:visible="false" />
         </menu>
     </item>
 

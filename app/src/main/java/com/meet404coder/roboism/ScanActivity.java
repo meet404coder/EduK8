@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+
 public class ScanActivity extends AppCompatActivity {
 
     Bitmap photo = null;
@@ -83,7 +85,12 @@ public class ScanActivity extends AppCompatActivity {
             }
 
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Notes");
-            ref.child(FirebaseAuth.getInstance().getCurrentUser().getEmail()).setValue(imageText);
+
+            String uid = null;
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            }
+            ref.child(uid).child(Calendar.getInstance().getTime().toString()).setValue(imageText);
 
             Toast.makeText(this, imageText, Toast.LENGTH_SHORT).show();
         }

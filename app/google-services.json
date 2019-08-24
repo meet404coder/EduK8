@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "692179434440-rjcriovrk19bl022fv7kjsqgimldna7i.apps.googleusercontent.com",
+          "client_id": "692179434440-jmf99hoj7i6t5vosr0smgkj0le0klh6n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.meet404coder.roboism",
-            "certificate_hash": "a8cf7697667c5a568e95dacb3a88c894c38f328b"
+            "certificate_hash": "bbf84a8afc28d501e615f3a10d0022e3c36a3aea"
           }
         },
         {
@@ -33,20 +33,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "692179434440-r86imhhhm4qfs62t0pflefn8hut69kj2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
