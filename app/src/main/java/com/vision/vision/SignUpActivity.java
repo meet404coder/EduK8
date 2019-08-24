@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.meet404coder.vision.R;
 
+
 public class SignUpActivity extends AppCompatActivity {
 
     @Override
