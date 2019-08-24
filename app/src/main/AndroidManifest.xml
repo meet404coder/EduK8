@@ -31,28 +31,36 @@
         <activity
             android:name=".ProfileView"
             android:screenOrientation="portrait" />
+        <!--<activity
+            android:name=".QrScanningActivity"
+            android:screenOrientation="portrait" />-->
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
+        <!--<activity
+            android:name=".MessOffOption"
+            android:screenOrientation="portrait" />
         <activity
+            android:name=".CreditListPopulate"
+            android:screenOrientation="portrait" />
+        --><activity
             android:name=".Feedback"
             android:screenOrientation="portrait" />
-        <activity android:name=".GuestOrLogin" />
-        <activity android:name=".E_IDCard" />
-<<<<<<< Updated upstream
-        <activity
+        <!--<activity android:name=".DataCompileActivity" />
+        --><activity android:name=".GuestOrLogin" />
+        <!--<activity android:name=".ReadBTandMarkAttendance" />
+        --><activity android:name=".E_IDCard" />
+        <!--<activity
             android:name=".PollingActivity"
             android:label="@string/title_activity_polling"
             android:theme="@style/AppTheme" />
         <activity android:name=".CreatePoll" />
-        <activity
+        --><!--<activity
             android:name=".MeetManagement"
             android:label="@string/title_activity_call_meet"
             android:theme="@style/AppTheme" />
         <activity android:name=".CallMeet" />
-=======
->>>>>>> Stashed changes
-    </application>
+    --></application>
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CAMERA" />
