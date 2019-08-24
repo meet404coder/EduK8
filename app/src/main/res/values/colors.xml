@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryBlueTheme">#3F51B5</color>
+    <color name="colorPrimaryDarkBlueTheme">#303F9F</color>
+    <color name="colorAccentBlueTheme">#FF4081</color>
+
+    <color name="colorAccent">#2C2A2B</color>
+    <color name="colorPrimary">#333132</color>
+    <color name="colorPrimaryDark">#2C2A2B</color>
+    <color name="colorPrimaryLight">#FFFFFF</color>
+
+    <color name="textColorLight">#FFFFFF</color>
+    <color name="textColorDark">#000000</color>
+
+    <color name="QRCodeWhiteColor">#ffffff</color>
+    <color name="QRCodeBlackColor">#000000</color>
+
+</resources>

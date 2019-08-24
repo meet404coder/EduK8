@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "692179434440",
+    "firebase_url": "https://roboism.firebaseio.com",
+    "project_id": "roboism",
+    "storage_bucket": "roboism.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692179434440:android:805edb97ef005e5d",
+        "android_client_info": {
+          "package_name": "com.meet404coder.roboism"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692179434440-rjcriovrk19bl022fv7kjsqgimldna7i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.meet404coder.roboism",
+            "certificate_hash": "a8cf7697667c5a568e95dacb3a88c894c38f328b"
+          }
+        },
+        {
+          "client_id": "692179434440-r86imhhhm4qfs62t0pflefn8hut69kj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMZqj5Clxd8i8c4p5FiHYkN6_O1I9eCuw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692179434440-r86imhhhm4qfs62t0pflefn8hut69kj2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

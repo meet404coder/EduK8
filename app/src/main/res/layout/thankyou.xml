@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="5"
+    android:background="#FFFFFF"
+    android:scaleType="centerCrop"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme.NoActionBar"
+    tools:alpha="5">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/thankyou_img"
+        android:layout_alignParentBottom="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="Hit Back to Continue..."
+        android:layout_alignParentBottom="true"
+        android:textSize="14dp"
+        android:textColor="#000000" />
+
+</RelativeLayout>

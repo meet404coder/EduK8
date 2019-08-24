@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_action_name"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Meal Switch" />
+    </group>
+
+    <item android:title="Credits">
+        <menu>
+            <item
+                android:id="@+id/nav_credits"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="App Developer" />
+        </menu>
+    </item>
+
+    <item android:title="Administrative">
+        <menu>
+            <item
+                android:id="@+id/nav_isAdmin"
+                android:icon="@drawable/ic_isadmin"
+                android:title="Admin Options" />
+        </menu>
+    </item>
+    <item android:title="Account Options">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Logout and Exit" />
+        </menu>
+    </item>
+</menu>

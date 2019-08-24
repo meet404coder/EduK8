@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lin_lay_createpoll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meet404coder.roboism.CreatePoll">
+
+    <TextView
+        android:id="@+id/protv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:gravity="center_horizontal"
+        android:text="Create Poll"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/enterques_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent"
+        android:hint="Enter Question"
+        android:padding="15dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textCursorDrawable="@null"
+        android:textSize="15dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/op_et_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="10dp"
+                android:hint="Enter Option 1"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:textCursorDrawable="@null"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/op_et_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="10dp"
+                android:hint="Enter Option 2"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:textCursorDrawable="@null"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/op_et_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="10dp"
+                android:hint="Enter Option 3"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:textCursorDrawable="@null"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/op_et_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="10dp"
+                android:hint="Enter Option 4"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:textCursorDrawable="@null"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/op_et_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="10dp"
+                android:hint="Enter Option 5"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:textCursorDrawable="@null"
+                android:textSize="15dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="17dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Question to be displayed to access levels:" />
+
+            <TextView
+                android:id="@+id/tv_qal_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Min(Inclusive): 1" />
+
+            <SeekBar
+                android:id="@+id/ques_access_level_bar_min"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:max="10"
+                android:progress="1" />
+
+            <TextView
+                android:id="@+id/tv_qal_max"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Max(Inclusive): 1" />
+
+            <SeekBar
+                android:id="@+id/ques_access_level_bar_max"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:max="10"
+                android:progress="1" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="17dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Results can be viewed by access levels:" />
+
+            <TextView
+                android:id="@+id/tv_ral_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Min(Inclusive): 1" />
+
+            <SeekBar
+                android:id="@+id/res_access_level_bar_min"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:max="10"
+                android:progress="1" />
+
+            <TextView
+                android:id="@+id/tv_ral_max"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Max(Inclusive): 1" />
+
+            <SeekBar
+                android:id="@+id/res_access_level_bar_max"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:max="10"
+                android:progress="1" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+            <Button
+                android:id="@+id/publish_bttn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/custombutton_roundsides"
+                android:text="PUBLISH"
+                android:textColor="@color/textColorLight" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

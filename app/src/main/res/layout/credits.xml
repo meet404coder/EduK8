@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="5"
+    android:background="@drawable/imgcredits_back"
+    android:orientation="vertical"
+    android:scaleType="centerCrop"
+    android:theme="@style/AppTheme.NoActionBar"
+    tools:alpha="5">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="6dp"
+        app:srcCompat="@drawable/img_credits" />
+
+    <TextView
+        android:id="@+id/tvq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView3"
+        android:layout_margin="15dp"
+        android:layout_marginBottom="63dp"
+        android:text="This App is Created solely for you IIT Dhanbad.\nBy one amongst you...\nYou can contact me here : meet404coder@gmail.com"
+        android:textColor="#ffffff"
+        android:textSize="12dp" />
+
+    <ScrollView
+        android:layout_below="@+id/tvq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:alpha="5"
+        android:background="@drawable/utility_back"
+        android:orientation="vertical"
+        android:scaleType="centerCrop"
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:alpha="5">
+
+        <ImageView
+            android:id="@+id/list_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="7dp"
+            android:layout_marginStart="17dp"
+            app:srcCompat="@drawable/developer_img" />
+
+        <TextView
+            android:id="@+id/list_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_toEndOf="@+id/list_img"
+            android:layout_weight="9.57"
+            android:text="App Developer"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="240dp"
+            android:id="@+id/list_name_view"
+            android:layout_height="2dp"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/list_name"
+            android:layout_marginStart="92dp"
+            android:background="#212121" />
+
+
+        <TextView
+            android:id="@+id/list_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/list_name_view"
+            android:layout_toEndOf="@+id/list_img"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="9.57"
+            android:textColor="#000000"
+            android:text="Prakhar Kumar (17JE002878)\nB.Tech. in EIE \nmeet404coder@gmail.com"
+            android:textSize="12dp" />
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_margin="8dp"
+        android:layout_above="@+id/backnot"
+        android:text="Sources: iitism.ac.in,freepic.com,google.com"
+        android:textColor="#000000"
+        android:textSize="8dp" />
+
+    <TextView
+        android:id="@+id/backnot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="right"
+        android:text="Hit Back to Continue..."
+        android:textColor="#000000"
+        android:textSize="10dp" />
+
+</RelativeLayout>
