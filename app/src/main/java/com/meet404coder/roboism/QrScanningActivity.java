@@ -108,7 +108,7 @@ public class QrScanningActivity extends AppCompatActivity {
             Dev.get(ADDRESS); //Gives the device name
         }
 
-        btControl.setDevice(AddressOfDevice);
+        //  btControl.setDevice(AddressOfDevice);
 
         try {
             btControl.openBTSerial();
