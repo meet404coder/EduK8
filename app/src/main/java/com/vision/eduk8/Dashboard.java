@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,6 +68,9 @@ public class Dashboard extends AppCompatActivity
 
     ProgressDialog progressDialog;
     DatabaseReference mhwRef = FirebaseDatabase.getInstance().getReference(Config.AdminUserHandshakeRef);
+    DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
+    String mUid;
+    String[] mTags;
 
     private final static int QRCODEWIDH = 500;
 
@@ -75,11 +79,6 @@ public class Dashboard extends AppCompatActivity
 //    ListView poll_lv,meet_lv,req_lv,news_lv,mvp_lv;
 //    List<MeetData> meetDataList = new LinkedList<>();
 //    List<PollDrafter> pollDataList = new LinkedList<>();
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,24 +95,75 @@ public class Dashboard extends AppCompatActivity
 //
 //        qrView = (ImageView) findViewById(R.id.qrview);
 //
-//        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 //        waitprg.setVisibility(View.VISIBLE);
+        if (mAuth != null) {
+            mUid = mAuth.getCurrentUser().getUid();
+        } else {
+            //If user is null
+        }
 
         prefManager.setFirstTimeLaunch(false);
 
-
         mFeed = (ListView) findViewById(R.id.feed);
 
-        ArrayList<FeedItemData> mFeedList = new ArrayList<>();
+        mRef.child("RoboISM Members Profile").child(mUid).child("tags").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mTags = (String[]) dataSnapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        final ArrayList<FeedItemData> mFeedList = new ArrayList<>();
 
         String[] tag = {"Lol", "Tmp"};
-        FeedItemData tmp = new FeedItemData("title", "body bla bla bla", "Taau Ji", tag, 2 );
+        FeedItemData tmp = new FeedItemData("title", "body bla bla bla", "Taau Ji", tag, 2, "lullz");
 
         mFeedList.add(tmp);
 
-        FeedAdapter mFeedAdapter =  new FeedAdapter(this, mFeedList);
+        final FeedAdapter mFeedAdapter = new FeedAdapter(this, mFeedList);
 
         mFeed.setAdapter(mFeedAdapter);
+        mFeedAdapter.notifyDataSetChanged();
+
+        mRef.child("Posts").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+               /* Toast.makeText(Dashboard.this, dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
+                Log.e("Lullz", dataSnapshot.getKey());*/
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    System.out.println("Lullz "+ds.getKey());
+                    try {
+                        FeedItemData fid = (FeedItemData) ds.getValue(FeedItemData.class);
+                        if (mTags == null) {
+                            mFeedList.add(fid);
+                        }
+                        else {
+                            for (String s : mTags) {
+                                if (fid.tags.contains(s)) {
+                                    mFeedList.add(fid);
+                                }
+                            }
+                        }
+                        mFeedAdapter.notifyDataSetChanged();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 //        poll_lv = (ListView) findViewById(R.id.polling_list);
 //        meet_lv = (ListView) findViewById(R.id.meet_list_view);
 //        req_lv = (ListView) findViewById(R.id.req_list_view);
@@ -144,7 +194,6 @@ public class Dashboard extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
         //Checking the signin method
         int signinmeth = CheckSignInMethod();
 
@@ -152,13 +201,13 @@ public class Dashboard extends AppCompatActivity
         //Returns 0 for Anonymous or otherwise
         //Returns -1 for not run for loop
 
-        if(signinmeth == 1){
+        if (signinmeth == 1) {
             isMember = true;
-        }else if(signinmeth == 0){
+        } else if (signinmeth == 0) {
             isMember = false;
         }
 
-        Toast.makeText(Dashboard.this,"IS MEMBER: "+isMember,Toast.LENGTH_LONG).show();
+        Toast.makeText(Dashboard.this, "IS MEMBER: " + isMember, Toast.LENGTH_LONG).show();
 
 //        meetingLoaderThread.start();
 //        pollingLoaderThread.start();
@@ -188,7 +237,6 @@ public class Dashboard extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
 
 
     @Override
@@ -231,16 +279,17 @@ public class Dashboard extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_updatedetails) {
-            startActivity(new Intent(Dashboard.this,RegisterActivity.class));
+            startActivity(new Intent(Dashboard.this, RegisterActivity.class));
             return true;
         }
         if (id == R.id.action_feedback) {
-            startActivity(new Intent(Dashboard.this,Feedback.class));
+            startActivity(new Intent(Dashboard.this, Feedback.class));
             return true;
         }
 
         if (id == R.id.action_addpost) {
-           // startActivity(new Intent(Dashboard.this, ));
+            startActivity(new Intent(Dashboard.this, ScanActivity.class));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -253,23 +302,23 @@ public class Dashboard extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_isAdmin) {
-            String[] options = {"Scan QR", "Compile Data","Open BT Read/Write","Polling","Meet Call"};
+            String[] options = {"Scan QR", "Compile Data", "Open BT Read/Write", "Polling", "Meet Call"};
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Select an option\n");
             builder.setItems(options, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if(which == 0){ //Scan QR is selected
+                    if (which == 0) { //Scan QR is selected
                         progressDialog.show();
                         CheckIsAdmin();
-                    }else if(which ==1){ //Compile Data is selected
+                    } else if (which == 1) { //Compile Data is selected
 //                        startActivity(new Intent(Dashboard.this,DataCompileActivity.class));
-                    }else if(which ==2){ //Compile Data is selected
+                    } else if (which == 2) { //Compile Data is selected
 //                       startActivity(new Intent(Dashboard.this,ReadBTandMarkAttendance.class));
-                    }else if(which == 3){
+                    } else if (which == 3) {
 //                        startActivity(new Intent(Dashboard.this,PollingActivity.class));
-                    }else if(which == 4){
+                    } else if (which == 4) {
 //                        startActivity(new Intent(Dashboard.this,MeetManagement.class));
                     }
                 }
@@ -300,16 +349,16 @@ public class Dashboard extends AppCompatActivity
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-        }else if(id == R.id.nav_credits){
+        } else if (id == R.id.nav_credits) {
             final Dialog dialog = new Dialog(Dashboard.this);
             dialog.setContentView(R.layout.credits);
             dialog.setTitle("Hello There !");
             dialog.show();
-            dialog.setOnKeyListener(new Dialog.OnKeyListener(){
+            dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
                 @Override
                 public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                    if(keyCode==KeyEvent.KEYCODE_BACK){
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
                         dialog.dismiss();
                     }
                     return true;
@@ -394,29 +443,28 @@ public class Dashboard extends AppCompatActivity
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
                     String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "QRCode", null);
                     prefManager.setQRsavedPath(path);
-                    if(progressDialog.isShowing()){
+                    if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
                     return Uri.parse(path);
 
                 } else {
-                    Toast.makeText(Dashboard.this,"Permission Required for loading QR!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Dashboard.this, "Permission Required for loading QR!", Toast.LENGTH_LONG).show();
                     //Log.v(TAG,"Permission is revoked");
                     ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 }
-            }
-            else { //permission is automatically granted on sdk<23 upon installation
+            } else { //permission is automatically granted on sdk<23 upon installation
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
                 String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "QRCode", null);
                 prefManager.setQRsavedPath(path);
-                if(progressDialog.isShowing()){
+                if (progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
                 return Uri.parse(path);
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -445,8 +493,9 @@ public class Dashboard extends AppCompatActivity
                         qrImageGenerated = TextToImageEncode(qrtext);
                         qrView.setImageBitmap(qrImageGenerated);
                         waitprg.setVisibility(View.GONE);
-                        if(progressDialog.isShowing()){
-                        progressDialog.dismiss();}
+                        if (progressDialog.isShowing()) {
+                            progressDialog.dismiss();
+                        }
                         saveQRandgetUri(Dashboard.this, qrImageGenerated);
 
 
@@ -461,7 +510,7 @@ public class Dashboard extends AppCompatActivity
 
     void HandleNetError() {
         //TODO:: Fill this function to handle the net related errors
-        if(!Dashboard.this.isFinishing()) {
+        if (!Dashboard.this.isFinishing()) {
             final Dialog dialog = new Dialog(Dashboard.this);
             dialog.setContentView(R.layout.dialog_internet_error);
             dialog.setTitle("Attention !");
@@ -496,13 +545,14 @@ public class Dashboard extends AppCompatActivity
     }
 
     String hw;
+
     String getHW() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mhwRef.child(uid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.getKey().equalsIgnoreCase("hotword")) {
-                    hw =  dataSnapshot.getValue().toString();
+                    hw = dataSnapshot.getValue().toString();
                     HWREADPROCEED();
                 }
             }
@@ -532,16 +582,16 @@ public class Dashboard extends AppCompatActivity
     }
 
     void ErrorContactingDatabase(DatabaseError e) {
-        if(!Dashboard.this.isFinishing()){
-        Toast.makeText(Dashboard.this, "ERROR DB: " + e, Toast.LENGTH_LONG).show();
-        final Dialog dialog = new Dialog(Dashboard.this);
-        dialog.setContentView(R.layout.dialog_internet_error);
-        dialog.setTitle("Attention !");
-        dialog.show();
+        if (!Dashboard.this.isFinishing()) {
+            Toast.makeText(Dashboard.this, "ERROR DB: " + e, Toast.LENGTH_LONG).show();
+            final Dialog dialog = new Dialog(Dashboard.this);
+            dialog.setContentView(R.layout.dialog_internet_error);
+            dialog.setTitle("Attention !");
+            dialog.show();
         }
     }
 
-    void HWREADPROCEED(){
+    void HWREADPROCEED() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         qrText = uid + "::" + hw;
         try {
@@ -555,12 +605,11 @@ public class Dashboard extends AppCompatActivity
                     //Log.v(TAG,"Permission is revoked");
                     ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 }
-            }
-            else { //permission is automatically granted on sdk<23 upon installation
+            } else { //permission is automatically granted on sdk<23 upon installation
                 generateQR(qrText);
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -568,14 +617,15 @@ public class Dashboard extends AppCompatActivity
 
 
     int sign_method = -1;
-    int CheckSignInMethod(){
+
+    int CheckSignInMethod() {
 
         //Returns 1 if phone
         //Returns 0 for Anonymous or otherwise
         //Returns -1 for not run for loop
 
-        for(UserInfo userInfo:mAuth.getCurrentUser().getProviderData()){
-            if(userInfo.getProviderId().equalsIgnoreCase("phone")){
+        for (UserInfo userInfo : mAuth.getCurrentUser().getProviderData()) {
+            if (userInfo.getProviderId().equalsIgnoreCase("phone")) {
                 //user has signed in using phone
                 sign_method = 1;
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -584,36 +634,36 @@ public class Dashboard extends AppCompatActivity
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        for(DataSnapshot ds1:dataSnapshot.getChildren()){
-                        for (DataSnapshot ds : ds1.getChildren()) {
-                            System.out.println(">>ACCESS CHK>>>> " + ds.getValue().toString());
-                            if (ds.getKey().equalsIgnoreCase("Status")) {
-                                if (ds.getValue().toString().equalsIgnoreCase("Allowed")) {
-                                    //Allow user to access the app
-                                } else if (ds.getValue().toString().equals("Restricted")) {
-                                    //logout user and display a warning
-                                    android.app.AlertDialog.Builder builder;
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                        builder = new android.app.AlertDialog.Builder(Dashboard.this, android.R.style.Theme_DeviceDefault);
-                                    } else {
-                                        builder = new android.app.AlertDialog.Builder(Dashboard.this);
+                        for (DataSnapshot ds1 : dataSnapshot.getChildren()) {
+                            for (DataSnapshot ds : ds1.getChildren()) {
+                                System.out.println(">>ACCESS CHK>>>> " + ds.getValue().toString());
+                                if (ds.getKey().equalsIgnoreCase("Status")) {
+                                    if (ds.getValue().toString().equalsIgnoreCase("Allowed")) {
+                                        //Allow user to access the app
+                                    } else if (ds.getValue().toString().equals("Restricted")) {
+                                        //logout user and display a warning
+                                        android.app.AlertDialog.Builder builder;
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            builder = new android.app.AlertDialog.Builder(Dashboard.this, android.R.style.Theme_DeviceDefault);
+                                        } else {
+                                            builder = new android.app.AlertDialog.Builder(Dashboard.this);
+                                        }
+                                        builder.setTitle("Access Revoked!")
+                                                .setMessage("\nYour access to this app has been revoked.\n" +
+                                                        "\nKindly contact the club officials ASAP!")
+                                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        // continue with logout
+                                                        mAuth.signOut();
+                                                        System.exit(0);
+                                                    }
+                                                })
+                                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                                .show();
                                     }
-                                    builder.setTitle("Access Revoked!")
-                                            .setMessage("\nYour access to this app has been revoked.\n" +
-                                                    "\nKindly contact the club officials ASAP!")
-                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    // continue with logout
-                                                    mAuth.signOut();
-                                                    System.exit(0);
-                                                }
-                                            })
-                                            .setIcon(android.R.drawable.ic_dialog_alert)
-                                            .show();
                                 }
                             }
                         }
-                    }
                     }
 
                     @Override
@@ -622,8 +672,7 @@ public class Dashboard extends AppCompatActivity
                     }
                 });
                 break;
-            }
-            else{
+            } else {
                 sign_method = 0;
             }
         }
