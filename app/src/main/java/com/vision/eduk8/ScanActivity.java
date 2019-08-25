@@ -128,6 +128,7 @@ public class ScanActivity extends AppCompatActivity {
                     scannedText.setText(finalImageText);
                     System.out.println(tagsText.getText().toString());
                     String[] tagstr = tagsText.getText().toString().split(",");
+                    String url = "www";
                     for (int i = 0; i < tagstr.length; i++) {
                         tagstr[i] = tagstr[i].toLowerCase();
                         System.out.println(tagstr[i]);
@@ -135,19 +136,25 @@ public class ScanActivity extends AppCompatActivity {
                     }
                     if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        String postId = Calendar.getInstance().getTime().toString();
                         FeedItemData data = new FeedItemData(titleText.getText().toString(),
                                 scannedText.getText().toString(),
                                 name,
                                 tagstr,
+                                url,
+                                uid,
+                                1,
+                                1,
+                                1,
                                 2,
-                                uid);
-                        String postId = Calendar.getInstance().getTime().toString();
+                                postId);
                         System.out.println(uid);
                         System.out.println(postId);
                         System.out.println(name);
 
                         mRef.child("Posts").child(postId).setValue(data);
-                        mRef.child("RoboISM Members Profile").child(uid).child("Posts").child(postId).setValue(postId);
+                        mRef.child("RoboISM Members Profile").child(uid).child("Posts").child(postId).child("pid").setValue(postId);
+                        mRef.child("RoboISM Members Profile").child(uid).child("Posts").child(postId).child("upvoted").setValue(2);
 
                         startActivity(new Intent(ScanActivity.this, Dashboard.class));
                     }
