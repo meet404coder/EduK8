@@ -68,11 +68,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                if (userProfile.uid.equals(uid)) {
                     finishAffinity();//This will finish all previous activity and then open dashboard
                     Intent startDash = new Intent(RegisterActivity.this, TagsActivity.class);
                     startActivity(startDash);
-                }
             }
 
             @Override
