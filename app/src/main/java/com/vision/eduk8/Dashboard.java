@@ -208,7 +208,7 @@ public class Dashboard extends AppCompatActivity
             }
         });
 
-        mFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* mFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView tvtit = (TextView) view.findViewById(R.id.ftxt_tv_title);
@@ -221,14 +221,22 @@ public class Dashboard extends AppCompatActivity
                 b.putString("body", tvbody.getText().toString());
                 b.putString("author", tvauthor.getText().toString());
                 b.putString("tags", tvTags.getText().toString());
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                ((BitmapDrawable) iv.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-                b.putByteArray("bitmap",byteArray);
+
+              try {
+                  ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                  ((BitmapDrawable) iv.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.PNG, 100, stream);
+                  byte[] byteArray = stream.toByteArray();
+                  if (byteArray != null) {
+                      b.putByteArray("bitmap", byteArray);
+                  }
+              }
+              catch (Exception e) {
+
+              }
                 Intent i  = new Intent(Dashboard.this, ViewPostActivity.class);
                 i.putExtra("bundle", b);
             }
-        });
+        });*/
 
 //        poll_lv = (ListView) findViewById(R.id.polling_list);
 //        meet_lv = (ListView) findViewById(R.id.meet_list_view);
