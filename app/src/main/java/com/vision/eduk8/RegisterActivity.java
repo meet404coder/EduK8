@@ -189,7 +189,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 //Susseccfully Generated Member's Profile
                                 progressDialog.dismiss();
                                 finishAffinity();//This will finish all previous activity and then open dashboard
-                                Intent startDash = new Intent(RegisterActivity.this, Dashboard.class);
+                                Intent startDash = new Intent(RegisterActivity.this, TagsActivity.class);
                                 startActivity(startDash);
                             } else {
                                 //User Data not stored

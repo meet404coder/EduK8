@@ -1,6 +1,8 @@
 package com.vision.eduk8;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,7 +126,7 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
             String[] tags = new String[viewData.tags.length()];
             for (String s : tags) {
                 tag += "#"+s+" ";
-                Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
             }
             holder.tvTags.setText(tag);
           /*  ArrayAdapter<String> tagGridAdapter = new ArrayAdapter<>(mContext, R.layout.tag_item, tagList);
@@ -212,6 +214,81 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
                     }
                     holder.ivThumbsUp.setAlpha(0.6f);
                 }
+            }
+        });
+
+        holder.txtBody.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(holder.txtTitle.getText().toString())
+                        .setMessage(holder.txtBody.getText().toString())
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            }
+        });
+
+        holder.txtAuthor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(holder.txtTitle.getText().toString())
+                        .setMessage(holder.txtBody.getText().toString())
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            }
+        });
+
+        holder.txtTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(holder.txtTitle.getText().toString())
+                        .setMessage(holder.txtBody.getText().toString())
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            }
+        });
+
+        holder.ivView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(holder.txtTitle.getText().toString())
+                        .setMessage(holder.txtBody.getText().toString())
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            }
+        });
+
+        holder.vdView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(holder.txtTitle.getText().toString())
+                        .setMessage(holder.txtBody.getText().toString())
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
             }
         });
 

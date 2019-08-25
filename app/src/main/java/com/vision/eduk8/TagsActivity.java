@@ -62,6 +62,7 @@ public class TagsActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Tags").setValue(tags);
 
                 Intent intent = new Intent(TagsActivity.this, Dashboard.class);
+                startActivity(intent);
             }
         });
 

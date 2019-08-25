@@ -134,7 +134,7 @@ public class ScanActivity extends AppCompatActivity {
                     for (int i = 0; i < tagstr.length; i++) {
                         tagstr[i] = tagstr[i].toLowerCase();
                         System.out.println(tagstr[i]);
-                        Toast.makeText(ScanActivity.this, tagstr[i], Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ScanActivity.this, tagstr[i], Toast.LENGTH_SHORT).show();
                     }
                     if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -163,7 +163,7 @@ public class ScanActivity extends AppCompatActivity {
                 }
             });
 
-            Toast.makeText(this, imageText, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, imageText, Toast.LENGTH_SHORT).show();
         }
     }
 }
