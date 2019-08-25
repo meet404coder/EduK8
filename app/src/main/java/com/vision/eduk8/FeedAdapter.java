@@ -124,43 +124,6 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         }
 
         holder.tvTags.setText(tag);
-          /*  ArrayAdapter<String> tagGridAdapter = new ArrayAdapter<>(mContext, R.layout.tag_item, tagList);
-            holder.gvTagsGrid.setAdapter(tagGridAdapter);
-            tagGridAdapter.notifyDataSetChanged(); */
-
-
-        mRef.child("Posts").child(viewData.mPid).child("upvotes").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                try {
-                    holder.upvotes.setText(((Long) dataSnapshot.getValue()).toString());
-                    //   holder.upvotes.setText(viewData.upvotes);
-                } catch (NumberFormatException e) {
-                    System.out.println("Exception Occured");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-        mRef.child("Posts").child(viewData.mPid).child("downvotes").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                try {
-                    holder.downvotes.setText(((Long) dataSnapshot.getValue()).toString());
-                    //    holder.downvotes.setText(viewData.downvotes);
-                } catch (NumberFormatException e) {
-                    System.out.println("Exception Occured");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         holder.ivMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,19 +134,67 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         holder.ivThumbsUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int upvote = 0, downvote = 0;
+                final Boolean[] update = {true, true};
                 if (v != null) {
                     if (v.getAlpha() == 0.6f) {
                         v.setAlpha(0.87f);
-                        mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes + 1);
+                        //  mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes + 1);
+                        upvote = 1;
                         mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("1");
                         if (holder.ivThumbsDown.getAlpha() == 0.87f) {
-                            mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes - 1);
+                            // mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes - 1);
+                            downvote = -1;
                         }
                     } else {
                         v.setAlpha(0.6f);
-                        mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes - 1);
+                        //  mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes - 1);
+                        upvote = -1;
                         mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("2");
                     }
+                    final int finalUpvote = upvote;
+                    mRef.child("Posts").child(viewData.mPid).child("upvotes").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            try {
+                                if (update[0]) {
+                                    long count = (Long) dataSnapshot.getValue();
+                                    count += finalUpvote;
+                                    mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(count);
+                                    holder.upvotes.setText(Long.toString(count));
+                                    update[0] = false;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Exception Occured");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+                    final int finalDownvote = downvote;
+                    mRef.child("Posts").child(viewData.mPid).child("downvotes").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            try {
+                                if (update[1]) {
+                                    long count = (Long) dataSnapshot.getValue();
+                                    count += finalDownvote;
+                                    mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(count);
+                                    holder.downvotes.setText(Long.toString(count));
+                                    update[1] = false;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Exception Occured");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                     holder.ivThumbsDown.setAlpha(0.6f);
                 }
             }
@@ -191,19 +202,67 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         holder.ivThumbsDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int upvote = 0, downvote = 0;
+                final Boolean[] update = {true, true};
                 if (v != null) {
                     if (v.getAlpha() == 0.6f) {
                         v.setAlpha(0.87f);
-                        mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes + 1);
+                      //  mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes + 1);
+                        downvote = 1;
                         mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("0");
                         if (holder.ivThumbsUp.getAlpha() == 0.87f) {
-                            mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes - 1);
+                          //  mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes - 1);
+                            upvote = -1;
                         }
                     } else {
                         v.setAlpha(0.6f);
-                        mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes - 1);
+                      //  mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes - 1);
+                        downvote = -1;
                         mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("2");
                     }
+                    final int finalUpvote = upvote;
+                    mRef.child("Posts").child(viewData.mPid).child("upvotes").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            try {
+                                if (update[0]) {
+                                    long count = (Long) dataSnapshot.getValue();
+                                    count += finalUpvote;
+                                    mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(count);
+                                    holder.upvotes.setText(Long.toString(count));
+                                    update[0] = false;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Exception Occured");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+                    final int finalDownvote = downvote;
+                    mRef.child("Posts").child(viewData.mPid).child("downvotes").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            try {
+                                if (update[1]) {
+                                    long count = (Long) dataSnapshot.getValue();
+                                    count += finalDownvote;
+                                    mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(count);
+                                    holder.downvotes.setText(Long.toString(count));
+                                    update[1] = false;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Exception Occured");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                     holder.ivThumbsUp.setAlpha(0.6f);
                 }
             }

@@ -156,10 +156,10 @@ public class Dashboard extends AppCompatActivity
                                     mPids.add(fid.mPid);
                                     mFeedList.add(fid);
                                 }
-                                else {
+                            /*    else {
                                     mFeedList.remove(mPids.lastIndexOf(fid.mPid));
                                     mFeedList.add(mPids.lastIndexOf(fid.mPid), fid);
-                                }
+                                }*/
 
                             } else {
                                 for (String s : mTags) {
@@ -168,10 +168,10 @@ public class Dashboard extends AppCompatActivity
                                             mPids.add(fid.mPid);
                                             mFeedList.add(fid);
                                         }
-                                        else {
+                                   /*     else {
                                             mFeedList.remove(mPids.lastIndexOf(fid.mPid));
                                             mFeedList.add(mPids.lastIndexOf(fid.mPid), fid);
-                                        }
+                                        }*/
                                     }
                                 }
                             }
