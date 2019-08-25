@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                 if (userProfile.uid.equals(uid)) {
                     finishAffinity();//This will finish all previous activity and then open dashboard
-                    Intent startDash = new Intent(RegisterActivity.this, Dashboard.class);
+                    Intent startDash = new Intent(RegisterActivity.this, TagsActivity.class);
                     startActivity(startDash);
                 }
             }

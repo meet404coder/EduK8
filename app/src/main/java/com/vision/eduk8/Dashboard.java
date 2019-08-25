@@ -221,7 +221,7 @@ public class Dashboard extends AppCompatActivity
             isMember = false;
         }
 
-        Toast.makeText(Dashboard.this, "IS MEMBER: " + isMember, Toast.LENGTH_LONG).show();
+        //Toast.makeText(Dashboard.this, "IS MEMBER: " + isMember, Toast.LENGTH_LONG).show();
 
 //        meetingLoaderThread.start();
 //        pollingLoaderThread.start();
@@ -298,11 +298,6 @@ public class Dashboard extends AppCompatActivity
         }
         if (id == R.id.action_feedback) {
             startActivity(new Intent(Dashboard.this, Feedback.class));
-            return true;
-        }
-
-        if (id == R.id.action_addpost) {
-            startActivity(new Intent(Dashboard.this, ScanActivity.class));
             return true;
         }
 

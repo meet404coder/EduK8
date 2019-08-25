@@ -122,11 +122,12 @@ public class ScanActivity extends AppCompatActivity {
             }
 
             final String finalImageText = imageText;
+            scannedText.setText(finalImageText);
+
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String uid = null;
-                    scannedText.setText(finalImageText);
                     System.out.println(tagsText.getText().toString());
                     String[] tagstr = tagsText.getText().toString().split(",");
                     String url = "www";

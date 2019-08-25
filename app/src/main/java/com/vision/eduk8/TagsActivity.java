@@ -1,5 +1,6 @@
 package com.vision.eduk8;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.chip.ChipGroup;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +60,8 @@ public class TagsActivity extends AppCompatActivity {
 
                 FirebaseDatabase.getInstance().getReference("Notes").child(
                         FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Tags").setValue(tags);
+
+                Intent intent = new Intent(TagsActivity.this, Dashboard.class);
             }
         });
 
