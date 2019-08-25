@@ -52,7 +52,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Tag 1" />
+                    android:text="#science" />
 
                 <com.github.okdroid.checkablechipview.CheckableChipView
                     android:id="@+id/chip2"
@@ -63,7 +63,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Tag 2" />
+                    android:text="#news" />
 
                 <com.github.okdroid.checkablechipview.CheckableChipView
                     android:id="@+id/chip3"
@@ -74,7 +74,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Tag 3" />
+                    android:text="#geography" />
 
                 <com.github.okdroid.checkablechipview.CheckableChipView
                     android:id="@+id/chip4"
@@ -85,7 +85,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Tag 4" />
+                    android:text="#national" />
 
                 <com.github.okdroid.checkablechipview.CheckableChipView
                     android:id="@+id/chip5"
@@ -96,7 +96,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Tag 5" />
+                    android:text="#technogy" />
 
                 <com.github.okdroid.checkablechipview.CheckableChipView
                     android:id="@+id/chip6"
@@ -107,7 +107,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Tag 6" />
+                    android:text="#sports" />
             </LinearLayout>
         </ScrollView>
 
