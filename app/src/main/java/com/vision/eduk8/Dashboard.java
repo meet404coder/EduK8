@@ -75,6 +75,7 @@ public class Dashboard extends AppCompatActivity
     private final static int QRCODEWIDH = 500;
 
     private ListView mFeed;
+    private ArrayList<String> mPids;
 
 //    ListView poll_lv,meet_lv,req_lv,news_lv,mvp_lv;
 //    List<MeetData> meetDataList = new LinkedList<>();
@@ -87,6 +88,7 @@ public class Dashboard extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mPids = new ArrayList<>();
 
         prefManager = new PrefManager(Dashboard.this);
 //        waitprg = (ProgressBar) findViewById(R.id.waitprogressbar);
@@ -120,12 +122,6 @@ public class Dashboard extends AppCompatActivity
         });
 
         final ArrayList<FeedItemData> mFeedList = new ArrayList<>();
-
-        String[] tag = {"Lol", "Tmp"};
-        FeedItemData tmp = new FeedItemData("title", "body bla bla bla", "Taau Ji", tag, 2, "lullz");
-
-        mFeedList.add(tmp);
-
         final FeedAdapter mFeedAdapter = new FeedAdapter(this, mFeedList);
 
         mFeed.setAdapter(mFeedAdapter);
@@ -137,30 +133,48 @@ public class Dashboard extends AppCompatActivity
                /* Toast.makeText(Dashboard.this, dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
                 Log.e("Lullz", dataSnapshot.getKey());*/
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    System.out.println("Lullz "+ds.getKey());
+                    System.out.println("Lullz " + ds.getKey());
                     try {
-                        FeedItemData fid = (FeedItemData) ds.getValue(FeedItemData.class);
-                        if (mTags == null) {
-                            mFeedList.add(fid);
-                        }
-                        else {
-                            for (String s : mTags) {
-                                if (fid.tags.contains(s)) {
-                                    mFeedList.add(fid);
+                        System.out.println(ds.getValue().toString());
+                        final FeedItemData fid = ds.getValue(FeedItemData.class);
+                        if (fid != null && !mPids.contains(fid.mPid)) {
+                            final int[] upvoted = new int[1];
+                            mRef.child(Config.MemberProfileRef).child(fid.uid).child("Posts").child(fid.mPid).child("upvoted").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapsh) {
+                                    upvoted[0] = Integer.parseInt(dataSnapsh.getValue().toString());
+                                    fid.likedStatus = upvoted[0];
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                            if (mTags == null) {
+                                mPids.add(fid.mPid);
+                                mFeedList.add(fid);
+
+                            } else {
+                                for (String s : mTags) {
+                                    if (fid.tags.contains(s)) {
+                                        mPids.add(fid.mPid);
+                                        mFeedList.add(fid);
+                                    }
                                 }
                             }
+                            mFeedAdapter.notifyDataSetChanged();
                         }
-                        mFeedAdapter.notifyDataSetChanged();
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
 
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                System.out.println(databaseError.getMessage());
             }
         });
 

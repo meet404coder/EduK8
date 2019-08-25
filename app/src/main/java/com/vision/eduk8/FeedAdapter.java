@@ -9,6 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -16,6 +23,7 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
 
     ArrayList<FeedItemData> dataList;
     Context mContext;
+    DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
 
     public FeedAdapter(@NonNull Context context, ArrayList<FeedItemData> data) {
         super(context, R.layout.feed_item, data);
@@ -31,6 +39,8 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         ImageView ivThumbsDown;
         ImageView ivMore;
         TextView tvTags;
+        ImageView ivView;
+        VideoView vdView;
     }
 
     @Override
@@ -50,7 +60,7 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        FeedItemData viewData = dataList.get(position);
+        final FeedItemData viewData = dataList.get(position);
         final ViewHolder holder;
 
         final View resultView;
@@ -67,6 +77,8 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
             holder.ivThumbsDown = (ImageView) convertView.findViewById(R.id.ftxt_iv_downvote);
             holder.ivMore = (ImageView) convertView.findViewById(R.id.ftxt_iv_more);
             holder.tvTags = (TextView) convertView.findViewById(R.id.ftxt_tv_tags);
+            holder.ivView = (ImageView) convertView.findViewById(R.id.feed_image);
+            holder.vdView = (VideoView) convertView.findViewById(R.id.feed_video);
 
             resultView = convertView;
 
@@ -94,6 +106,19 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
                 break;
         }
 
+        switch (viewData.itemType) {
+            case 0:
+                holder.ivView.setVisibility(View.GONE);
+                holder.vdView.setVisibility(View.GONE);
+                break;
+            case 1:
+                holder.vdView.setVisibility(View.GONE);
+                break;
+            case 2:
+                holder.ivView.setVisibility(View.GONE);
+                break;
+        }
+
         String tag = "";
         if (viewData.tags != null) {
             String[] tags = new String[viewData.tags.length()];
@@ -107,6 +132,39 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
             tagGridAdapter.notifyDataSetChanged(); */
         }
 
+        mRef.child("Posts").child(viewData.mPid).child("upvotes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    viewData.upvotes = Integer.parseInt(dataSnapshot.getValue().toString());
+                }
+                catch (NumberFormatException e) {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mRef.child("Posts").child(viewData.mPid).child("downvotes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    viewData.downvotes = Integer.parseInt(dataSnapshot.getValue().toString());
+                }
+                catch (NumberFormatException e) {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         holder.ivMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +176,16 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
             @Override
             public void onClick(View v) {
                 if (v != null) {
-                    v.setAlpha(0.87f);
+                    if (v.getAlpha() == 0.6f) {
+                        v.setAlpha(0.87f);
+                        mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes + 1);
+                        mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("1");
+                    }
+                    else {
+                        v.setAlpha(0.6f);
+                        mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes - 1);
+                        mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("2");
+                    }
                     holder.ivThumbsDown.setAlpha(0.6f);
                 }
             }
@@ -127,7 +194,16 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
             @Override
             public void onClick(View v) {
                 if (v != null) {
-                    v.setAlpha(0.87f);
+                    if (v.getAlpha() == 0.6f) {
+                        v.setAlpha(0.87f);
+                        mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes + 1);
+                        mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("0");
+                    }
+                    else {
+                        v.setAlpha(0.6f);
+                        mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes - 1);
+                        mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("2");
+                    }
                     holder.ivThumbsUp.setAlpha(0.6f);
                 }
             }
