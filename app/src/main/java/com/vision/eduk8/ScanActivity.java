@@ -7,9 +7,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +45,8 @@ public class ScanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 
+        GeneratePresignedUrlAndUploadObject a = new GeneratePresignedUrlAndUploadObject();
+
         scannedText = (EditText) findViewById(R.id.scannedText);
         tagsText = (EditText) findViewById(R.id.enterTags);
         titleText = (EditText) findViewById(R.id.enterTitle);
@@ -60,11 +62,10 @@ public class ScanActivity extends AppCompatActivity {
             mRef.child(Config.MemberProfileRef).child(uid).child("name").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.getValue().toString() != null) {
+                    if (dataSnapshot.getValue() != null) {
                         name = dataSnapshot.getValue().toString();
                         namefetched = true;
                     }
-                    System.out.println(dataSnapshot.getValue().toString());
                 }
 
                 @Override

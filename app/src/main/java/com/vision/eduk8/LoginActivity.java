@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * A login screen that offers login via status/password.
  */
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
     private String verificationCode;
     private static final String TAG = "LoginActivity" ;
     public EditText et_loginId,et_pass;
