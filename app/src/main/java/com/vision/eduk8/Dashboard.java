@@ -137,7 +137,7 @@ public class Dashboard extends AppCompatActivity
                     try {
                         System.out.println(ds.getValue().toString());
                         final FeedItemData fid = ds.getValue(FeedItemData.class);
-                        if (fid != null && !mPids.contains(fid.mPid)) {
+                        if (fid != null) {
                             final int[] upvoted = new int[1];
                             mRef.child(Config.MemberProfileRef).child(fid.uid).child("Posts").child(fid.mPid).child("upvoted").addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -152,14 +152,26 @@ public class Dashboard extends AppCompatActivity
                                 }
                             });
                             if (mTags == null) {
-                                mPids.add(fid.mPid);
-                                mFeedList.add(fid);
+                                if (!mPids.contains(fid.mPid)) {
+                                    mPids.add(fid.mPid);
+                                    mFeedList.add(fid);
+                                }
+                                else {
+                                    mFeedList.remove(mPids.lastIndexOf(fid.mPid));
+                                    mFeedList.add(mPids.lastIndexOf(fid.mPid), fid);
+                                }
 
                             } else {
                                 for (String s : mTags) {
                                     if (fid.tags.contains(s)) {
-                                        mPids.add(fid.mPid);
-                                        mFeedList.add(fid);
+                                        if (!mPids.contains(fid.mPid)) {
+                                            mPids.add(fid.mPid);
+                                            mFeedList.add(fid);
+                                        }
+                                        else {
+                                            mFeedList.remove(mPids.lastIndexOf(fid.mPid));
+                                            mFeedList.add(mPids.lastIndexOf(fid.mPid), fid);
+                                        }
                                     }
                                 }
                             }
@@ -222,6 +234,7 @@ public class Dashboard extends AppCompatActivity
         }
 
         //Toast.makeText(Dashboard.this, "IS MEMBER: " + isMember, Toast.LENGTH_LONG).show();
+      //  Toast.makeText(Dashboard.this, "IS MEMBER: " + isMember, Toast.LENGTH_LONG).show();
 
 //        meetingLoaderThread.start();
 //        pollingLoaderThread.start();
@@ -298,6 +311,11 @@ public class Dashboard extends AppCompatActivity
         }
         if (id == R.id.action_feedback) {
             startActivity(new Intent(Dashboard.this, Feedback.class));
+            return true;
+        }
+
+        if (id == R.id.app_bar_search) {
+
             return true;
         }
 

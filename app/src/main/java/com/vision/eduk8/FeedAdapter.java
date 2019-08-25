@@ -41,6 +41,8 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         TextView tvTags;
         ImageView ivView;
         VideoView vdView;
+        TextView upvote;
+        TextView downvote;
     }
 
     @Override
@@ -79,6 +81,8 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
             holder.tvTags = (TextView) convertView.findViewById(R.id.ftxt_tv_tags);
             holder.ivView = (ImageView) convertView.findViewById(R.id.feed_image);
             holder.vdView = (VideoView) convertView.findViewById(R.id.feed_video);
+            holder.upvote = (TextView) convertView.findViewById(R.id.upvote_count);
+            holder.downvote = (TextView) convertView.findViewById(R.id.downvote_count);
 
             resultView = convertView;
 
@@ -119,18 +123,21 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
                 break;
         }
 
-        String tag = "";
+       /* String tag = "";
         if (viewData.tags != null) {
-            String[] tags = new String[viewData.tags.length()];
+            String[] tags = ArrayAdapter.createFromResource()
             for (String s : tags) {
                 tag += "#"+s+" ";
                 Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
-            }
-            holder.tvTags.setText(tag);
+            }*/
+       holder.tvTags.setText(viewData.tags);
           /*  ArrayAdapter<String> tagGridAdapter = new ArrayAdapter<>(mContext, R.layout.tag_item, tagList);
             holder.gvTagsGrid.setAdapter(tagGridAdapter);
-            tagGridAdapter.notifyDataSetChanged(); */
-        }
+            tagGridAdapter.notifyDataSetChanged();
+        }*/
+
+      /*  holder.upvote.setText(viewData.upvotes);
+        holder.downvote.setText(viewData.downvotes);*/
 
         mRef.child("Posts").child(viewData.mPid).child("upvotes").addValueEventListener(new ValueEventListener() {
             @Override
@@ -165,6 +172,7 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
 
             }
         });
+
 
         holder.ivMore.setOnClickListener(new View.OnClickListener() {
             @Override
