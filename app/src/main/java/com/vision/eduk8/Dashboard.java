@@ -78,7 +78,7 @@ public class Dashboard extends AppCompatActivity
 
     private final static int QRCODEWIDH = 500;
 
-    private ListView mFeed;
+    private ListView mFeed, mSearch;
     private ArrayList<String> mPids;
 
 //    ListView poll_lv,meet_lv,req_lv,news_lv,mvp_lv;
@@ -113,6 +113,7 @@ public class Dashboard extends AppCompatActivity
         prefManager.setFirstTimeLaunch(false);
 
         mFeed = (ListView) findViewById(R.id.feed);
+        mSearch = (ListView) findViewById(R.id.search);
 
         mRef.child("RoboISM Members Profile").child(mUid).child("tags").addValueEventListener(new ValueEventListener() {
             @Override
