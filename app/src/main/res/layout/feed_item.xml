@@ -79,29 +79,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/ftxt_iv_upvote"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_margin="5dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/baseline_thumb_up_alt_black_48" />
-
-                <ImageView
-                    android:id="@+id/ftxt_iv_downvote"
-                    android:layout_width="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_height="24dp"
-                    android:layout_toStartOf="@id/ftxt_iv_upvote"
-                    android:src="@drawable/baseline_thumb_down_alt_black_48" />
-
                 <TextView
                     android:id="@+id/ftxt_tv_author"
                     android:layout_width="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@id/ftxt_iv_downvote" />
+                    android:layout_toStartOf="@id/downvote_count" />
+
+                <TextView
+                    android:id="@+id/downvote_count"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:layout_toStartOf="@+id/ftxt_iv_downvote" />
+
+
+                <ImageView
+                    android:id="@+id/ftxt_iv_downvote"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_height="24dp"
+                    android:layout_toStartOf="@id/ftxt_iv_upvote"
+                    android:src="@drawable/baseline_thumb_down_alt_black_48" />
+
+                <ImageView
+                    android:id="@+id/ftxt_iv_upvote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toStartOf="@+id/upvote_count"
+                    android:src="@drawable/baseline_thumb_up_alt_black_48" />
+
+                <TextView
+                    android:id="@+id/upvote_count"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:layout_alignParentEnd="true" />
+
+
             </RelativeLayout>
         </LinearLayout>
 

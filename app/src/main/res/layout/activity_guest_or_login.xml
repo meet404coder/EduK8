@@ -21,6 +21,7 @@
         <Button
             android:id="@+id/guest_bttn"
             android:layout_width="250dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_below="@+id/logoim"
             android:background="@drawable/custombutton_roundsides"

@@ -61,8 +61,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:visibility="gone"
                     android:hint="Admission Number"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:text="17JE002878"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -91,6 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:visibility="gone"
                     android:hint="Department"
                     android:entries="@array/deplist"
                     android:inputType="number" />
@@ -107,6 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:visibility="gone"
                     android:hint="Hostel Name"
                     android:entries="@array/hostelname"
                     android:inputType="number" />
@@ -122,6 +126,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:visibility="gone"
+                    android:text="D355"
                     android:layout_marginTop="10dp"
                     android:hint="Block and Room"
                     android:inputType="textCapCharacters" />
@@ -138,6 +144,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:visibility="gone"
                     android:hint="Designation"
                     android:entries="@array/desig"
                     android:inputType="number" />
