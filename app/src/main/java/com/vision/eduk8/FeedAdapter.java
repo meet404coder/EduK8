@@ -180,6 +180,9 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
                         v.setAlpha(0.87f);
                         mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes + 1);
                         mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("1");
+                        if (holder.ivThumbsDown.getAlpha() == 0.87f) {
+                            mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes - 1);
+                        }
                     }
                     else {
                         v.setAlpha(0.6f);
@@ -198,6 +201,9 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
                         v.setAlpha(0.87f);
                         mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes + 1);
                         mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("0");
+                        if (holder.ivThumbsUp.getAlpha() == 0.87f) {
+                            mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes - 1);
+                        }
                     }
                     else {
                         v.setAlpha(0.6f);
