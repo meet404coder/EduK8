@@ -166,7 +166,7 @@ public class LoginActivity extends AppCompatActivity{
         }
     }
 
-    static boolean mem_possible = false;
+    static boolean mem_possible = true;
     void tryLogin(){
         //Check if the feilds are filled
         if(FeildsAreFilled()) {

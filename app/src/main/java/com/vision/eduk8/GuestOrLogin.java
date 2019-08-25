@@ -40,6 +40,8 @@ public class GuestOrLogin extends AppCompatActivity {
         bttn_login = (Button) findViewById(R.id.login_bttn);
         logoView = (ImageView) findViewById(R.id.logoim);
 
+        bttn_guest.setEnabled(false);
+
         Picasso.with(GuestOrLogin.this).load(R.drawable.blk_logo).fit().into(logoView);
 
         bttn_guest.setOnClickListener(new View.OnClickListener() {

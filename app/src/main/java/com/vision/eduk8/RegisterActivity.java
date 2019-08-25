@@ -38,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     String mobile;
     String hostel, designation, department;
     String room;
+    String[] tags = null;
     String firebaseID = FirebaseInstanceId.getInstance().getToken();
 
     ProgressDialog pd;
@@ -180,6 +181,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     //firebase data store
                     DatabaseReference memberProfileRef = FirebaseDatabase.getInstance().getReference(Config.MemberProfileRef);
+                    memberProfileRef.child(userdata.uid).child("tags").setValue(tags);
                     memberProfileRef.child(userdata.uid).setValue(userdata).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

@@ -76,10 +76,10 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
             resultView = convertView;
         }
 
-        holder.txtTitle.setText(viewData.mTitle);
-        holder.txtBody.setText(viewData.mBody);
-        holder.txtAuthor.setText(viewData.mAuthor);
-        switch(viewData.mLikedStatus) {
+        holder.txtTitle.setText(viewData.title);
+        holder.txtBody.setText(viewData.body);
+        holder.txtAuthor.setText(viewData.author);
+        switch(viewData.likedStatus) {
             case 0:
                 holder.ivThumbsUp.setAlpha(0.6f);
                 holder.ivThumbsDown.setAlpha(0.87f);
@@ -95,8 +95,8 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         }
 
         String tag = "";
-        if (viewData.mTags != null) {
-            String[] tags = new String[viewData.mTags.length];
+        if (viewData.tags != null) {
+            String[] tags = new String[viewData.tags.length()];
             for (String s : tags) {
                 tag += "#"+s+" ";
                 Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
