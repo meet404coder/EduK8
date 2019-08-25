@@ -48,6 +48,17 @@
                 android:text="17JE002878"/>
 
             <TextView
+                android:id="@+id/id_posts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
+                android:text="My Posts"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24dp"
+                android:visibility="visible" />
+
+            <TextView
                 android:id="@+id/id_desig"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -165,6 +165,9 @@ public class ScanActivity extends AppCompatActivity {
 
             //Toast.makeText(this, imageText, Toast.LENGTH_SHORT).show();
         }
+        else {
+            startActivity(new Intent(ScanActivity.this, Dashboard.class));
+        }
     }
 }
 

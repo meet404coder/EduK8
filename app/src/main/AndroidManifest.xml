@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewPostActivity"></activity>
-        <activity android:name=".TagsActivity"></activity>
+        <activity android:name=".MyPostsActivity"></activity>
+        <activity android:name=".ViewPostActivity" />
+        <activity android:name=".TagsActivity" />
         <activity android:name=".ScanActivity" />
         <activity
             android:name=".SplashScreenManager"
@@ -55,14 +56,14 @@
         <activity android:name=".GuestOrLogin" /> <!-- <activity android:name=".ReadBTandMarkAttendance" /> -->
         <activity android:name=".E_IDCard" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

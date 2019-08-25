@@ -42,15 +42,15 @@ public class TagsActivity extends AppCompatActivity {
                     i++;
                 }
                 if (chip2.isChecked()) {
-                    tags.add(chip1.getText().toString());
+                    tags.add(chip2.getText().toString());
                     i++;
                 }
                 if (chip3.isChecked()) {
-                    tags.add(chip1.getText().toString());
+                    tags.add(chip3.getText().toString());
                     i++;
                 }
                 if (chip4.isChecked()) {
-                    tags.add(chip1.getText().toString());
+                    tags.add(chip4.getText().toString());
                     i++;
                 }
                 if (chip5.isChecked()) {

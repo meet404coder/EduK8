@@ -2,6 +2,7 @@ package com.vision.eduk8;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -46,7 +47,7 @@ public class E_IDCard extends AppCompatActivity {
     Bitmap qrImageGenerated;
     ProgressBar waitprg;
 
-    TextView tv_name,tv_admno,tv_desig,tv_dep,tv_email,tv_mob,tv_hostel,tv_room,tv_charge;
+    TextView tv_name,tv_admno,tv_desig,tv_dep,tv_email,tv_mob,tv_hostel,tv_room,tv_charge, tv_posts;
 
     String idQRString = "ERROR 404";
 
@@ -66,7 +67,14 @@ public class E_IDCard extends AppCompatActivity {
         tv_hostel= (TextView) findViewById(R.id.id_hostel);
         tv_room  = (TextView) findViewById(R.id.id_room);
         tv_charge= (TextView) findViewById(R.id.id_charges);
+        tv_posts = (TextView) findViewById(R.id.id_posts);
 
+        tv_posts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(E_IDCard.this, MyPostsActivity.class));
+            }
+        });
 
         progressDialog = new ProgressDialog(E_IDCard.this);
         progressDialog.setCancelable(false);
