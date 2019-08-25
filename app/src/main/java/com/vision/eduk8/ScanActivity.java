@@ -62,11 +62,10 @@ public class ScanActivity extends AppCompatActivity {
             mRef.child(Config.MemberProfileRef).child(uid).child("name").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.getValue().toString() != null) {
+                    if (dataSnapshot.getValue() != null) {
                         name = dataSnapshot.getValue().toString();
                         namefetched = true;
                     }
-                    System.out.println(dataSnapshot.getValue().toString());
                 }
 
                 @Override
