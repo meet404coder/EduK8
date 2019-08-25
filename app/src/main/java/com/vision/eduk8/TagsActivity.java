@@ -58,6 +58,8 @@ public class TagsActivity extends AppCompatActivity {
                     i++;
                 }
 
+                // Set tags
+
                 FirebaseDatabase.getInstance().getReference("Notes").child(
                         FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Tags").setValue(tags);
 
