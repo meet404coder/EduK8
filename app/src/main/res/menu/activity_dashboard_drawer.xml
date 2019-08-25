@@ -26,6 +26,7 @@
     <item android:title="Administrative">
         <menu>
             <item
+                android:visible="false"
                 android:id="@+id/nav_isAdmin"
                 android:icon="@drawable/ic_isadmin"
                 android:title="Admin Options" />

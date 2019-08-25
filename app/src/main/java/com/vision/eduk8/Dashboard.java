@@ -20,6 +20,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -80,6 +81,7 @@ public class Dashboard extends AppCompatActivity
 
     private ListView mFeed, mSearch;
     private ArrayList<String> mPids;
+    private SwipeRefreshLayout pullToRefresh;
 
 //    ListView poll_lv,meet_lv,req_lv,news_lv,mvp_lv;
 //    List<MeetData> meetDataList = new LinkedList<>();
@@ -91,19 +93,22 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.pulltorefresh);
 
         mPids = new ArrayList<>();
         mTags = new ArrayList<>();
 
         prefManager = new PrefManager(Dashboard.this);
-//        waitprg = (ProgressBar) findViewById(R.id.waitprogressbar);
-//        waitprg.getIndeterminateDrawable().setColorFilter(0xFF000000, android.graphics.PorterDuff.Mode.MULTIPLY);
+        waitprg = (ProgressBar) findViewById(R.id.waitprogressbar);
+        waitprg.getIndeterminateDrawable().setColorFilter(0xFF000000, android.graphics.PorterDuff.Mode.MULTIPLY);
+        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.pulltorefresh);
+        swipeRefreshLayout.setEnabled(false);
 //        refreshQrBttn = (Button) findViewById(R.id.refreshqr_bttn);
 //
 //        qrView = (ImageView) findViewById(R.id.qrview);
 //
         mAuth = FirebaseAuth.getInstance();
-//        waitprg.setVisibility(View.VISIBLE);
+        waitprg.setVisibility(View.VISIBLE);
         if (mAuth != null) {
             mUid = mAuth.getCurrentUser().getUid();
         } else {
@@ -187,12 +192,19 @@ public class Dashboard extends AppCompatActivity
                         e.printStackTrace();
                     }
                 }
+                waitprg.setVisibility(View.GONE);
             }
 
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println(databaseError.getMessage());
+                pullToRefresh.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        pullToRefresh.setRefreshing(false);
+                    }
+                });
             }
         });
 
@@ -337,10 +349,13 @@ public class Dashboard extends AppCompatActivity
             startActivity(new Intent(Dashboard.this, RegisterActivity.class));
             return true;
         }
+        /*
         if (id == R.id.action_feedback) {
             startActivity(new Intent(Dashboard.this, Feedback.class));
             return true;
         }
+        */
+
 
         if (id == R.id.app_bar_search) {
 
@@ -355,6 +370,7 @@ public class Dashboard extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
 
         if (id == R.id.nav_isAdmin) {
             String[] options = {"Scan QR", "Compile Data", "Open BT Read/Write", "Polling", "Meet Call"};

@@ -12,9 +12,9 @@
         android:orderInCategory="100"
         android:title="Update Details"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_feedback"
-        android:orderInCategory="100"
-        android:title="Give Feedback"
-        app:showAsAction="never" />
+<!--    <item-->
+<!--        android:id="@+id/action_feedback"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="Give Feedback"-->
+<!--        app:showAsAction="never" />-->
 </menu>

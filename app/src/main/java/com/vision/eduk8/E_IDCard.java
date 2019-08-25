@@ -74,7 +74,7 @@ public class E_IDCard extends AppCompatActivity {
         progressDialog.setMessage("Please wait a while...");
         progressDialog.show();
 
-        waitprg = (ProgressBar) findViewById(R.id.waitprogressbar);
+        waitprg = (ProgressBar) findViewById(R.id.waitprogressbar1);
         waitprg.getIndeterminateDrawable().setColorFilter(0xFF000000, android.graphics.PorterDuff.Mode.MULTIPLY);
 
         qrView = (ImageView) findViewById(R.id.qrview);
