@@ -24,6 +24,42 @@
         android:layout_height="wrap_content"
         android:text="Tag 2" />
 
+        <com.github.okdroid.checkablechipview.CheckableChipView
+            android:id="@+id/chip3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag 3" />
+
+        <com.github.okdroid.checkablechipview.CheckableChipView
+            android:id="@+id/chip4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag 4" />
+
+        <com.github.okdroid.checkablechipview.CheckableChipView
+            android:id="@+id/chip5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag 5" />
+
+        <com.github.okdroid.checkablechipview.CheckableChipView
+            android:id="@+id/chip6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag 6" />
+
+        <com.github.okdroid.checkablechipview.CheckableChipView
+            android:id="@+id/chip7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag 7" />
+
+        <Button
+            android:id="@+id/submit_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"/>
+
 </LinearLayout>
 
 </LinearLayout>
