@@ -24,10 +24,10 @@
 
     <include layout="@layout/content_feed"
         android:id="@+id/include" />
-
-    <include layout="@layout/content_search"
+<!--
+  <include layout="@layout/content_search"
         android:id="@+id/include2"/>
-
+-->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

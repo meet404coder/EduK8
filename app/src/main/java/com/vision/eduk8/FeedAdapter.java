@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+
 public class FeedAdapter extends ArrayAdapter<FeedItemData> {
 
     ArrayList<FeedItemData> dataList;
@@ -32,18 +33,6 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         super(context, R.layout.feed_item, data);
         mContext = context;
         dataList = data;
-    }
-
-    public static class ViewHolder {
-        TextView txtTitle;
-        TextView txtBody;
-        TextView txtAuthor;
-        ImageView ivThumbsUp;
-        ImageView ivThumbsDown;
-        ImageView ivMore;
-        TextView tvTags;
-        ImageView ivView;
-        VideoView vdView;
     }
 
     @Override
@@ -75,13 +64,15 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
             convertView = inflater.inflate(R.layout.feed_item, parent, false);
             holder.txtTitle = (TextView) convertView.findViewById(R.id.ftxt_tv_title);
             holder.txtBody = (TextView) convertView.findViewById(R.id.ftxt_tv_body);
-            holder.txtAuthor =  (TextView) convertView.findViewById(R.id.ftxt_tv_author);
+            holder.txtAuthor = (TextView) convertView.findViewById(R.id.ftxt_tv_author);
             holder.ivThumbsUp = (ImageView) convertView.findViewById(R.id.ftxt_iv_upvote);
             holder.ivThumbsDown = (ImageView) convertView.findViewById(R.id.ftxt_iv_downvote);
             holder.ivMore = (ImageView) convertView.findViewById(R.id.ftxt_iv_more);
             holder.tvTags = (TextView) convertView.findViewById(R.id.ftxt_tv_tags);
             holder.ivView = (ImageView) convertView.findViewById(R.id.feed_image);
             holder.vdView = (VideoView) convertView.findViewById(R.id.feed_video);
+            holder.upvotes = (TextView) convertView.findViewById(R.id.upvote_count);
+            holder.downvotes = (TextView) convertView.findViewById(R.id.downvote_count);
 
             resultView = convertView;
 
@@ -94,7 +85,7 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         holder.txtTitle.setText(viewData.title);
         holder.txtBody.setText(viewData.body);
         holder.txtAuthor.setText(viewData.author);
-        switch(viewData.likedStatus) {
+        switch (viewData.likedStatus) {
             case 0:
                 holder.ivThumbsUp.setAlpha(0.6f);
                 holder.ivThumbsDown.setAlpha(0.87f);
@@ -126,32 +117,31 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         }
 
         String tag = "";
-        if (viewData.tags != null) {
-            String[] tags = new String[viewData.tags.length()];
-            for (String s : tags) {
-                tag += "#"+s+" ";
-                //Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
-            }
-            holder.tvTags.setText(tag);
+        String[] tags = viewData.tags.replace("[", "").replace("]", "").replace(" ", "").split(",");
+
+        for (String s : tags) {
+            tag += "#" + s + " ";
+        }
+
+        holder.tvTags.setText(tag);
           /*  ArrayAdapter<String> tagGridAdapter = new ArrayAdapter<>(mContext, R.layout.tag_item, tagList);
             holder.gvTagsGrid.setAdapter(tagGridAdapter);
             tagGridAdapter.notifyDataSetChanged(); */
-        }
+
 
         mRef.child("Posts").child(viewData.mPid).child("upvotes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try {
-                    viewData.upvotes = Integer.parseInt(dataSnapshot.getValue().toString());
-                }
-                catch (NumberFormatException e) {
-
+                    holder.upvotes.setText(((Long) dataSnapshot.getValue()).toString());
+                    //   holder.upvotes.setText(viewData.upvotes);
+                } catch (NumberFormatException e) {
+                    System.out.println("Exception Occured");
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -159,10 +149,10 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try {
-                    viewData.downvotes = Integer.parseInt(dataSnapshot.getValue().toString());
-                }
-                catch (NumberFormatException e) {
-
+                    holder.downvotes.setText(((Long) dataSnapshot.getValue()).toString());
+                    //    holder.downvotes.setText(viewData.downvotes);
+                } catch (NumberFormatException e) {
+                    System.out.println("Exception Occured");
                 }
             }
 
@@ -189,8 +179,7 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
                         if (holder.ivThumbsDown.getAlpha() == 0.87f) {
                             mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes - 1);
                         }
-                    }
-                    else {
+                    } else {
                         v.setAlpha(0.6f);
                         mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes - 1);
                         mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("2");
@@ -210,8 +199,7 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
                         if (holder.ivThumbsUp.getAlpha() == 0.87f) {
                             mRef.child("Posts").child(viewData.mPid).child("upvotes").setValue(viewData.upvotes - 1);
                         }
-                    }
-                    else {
+                    } else {
                         v.setAlpha(0.6f);
                         mRef.child("Posts").child(viewData.mPid).child("downvotes").setValue(viewData.downvotes - 1);
                         mRef.child(Config.MemberProfileRef).child(viewData.uid).child("Posts").child(viewData.mPid).child("upvoted").setValue("2");
@@ -297,5 +285,19 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
         });
 
         return convertView;
+    }
+
+    public static class ViewHolder {
+        TextView txtTitle;
+        TextView txtBody;
+        TextView txtAuthor;
+        ImageView ivThumbsUp;
+        ImageView ivThumbsDown;
+        ImageView ivMore;
+        TextView tvTags;
+        ImageView ivView;
+        VideoView vdView;
+        TextView upvotes;
+        TextView downvotes;
     }
 }
