@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -115,9 +116,12 @@ public class FeedAdapter extends ArrayAdapter<FeedItemData> {
                 break;
             case 1:
                 holder.vdView.setVisibility(View.GONE);
+                holder.ivView.setVisibility(View.VISIBLE);
+                Glide.with(getContext()).load(viewData.url).into(holder.ivView);
                 break;
             case 2:
                 holder.ivView.setVisibility(View.GONE);
+                holder.vdView.setVisibility(View.VISIBLE);
                 break;
         }
 
