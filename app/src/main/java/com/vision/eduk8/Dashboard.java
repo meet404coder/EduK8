@@ -8,10 +8,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -26,10 +28,12 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.UserInfo;
@@ -70,7 +74,7 @@ public class Dashboard extends AppCompatActivity
     DatabaseReference mhwRef = FirebaseDatabase.getInstance().getReference(Config.AdminUserHandshakeRef);
     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
     String mUid;
-    String[] mTags;
+    ArrayList<String> mTags;
 
     private final static int QRCODEWIDH = 500;
 
@@ -89,6 +93,7 @@ public class Dashboard extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         mPids = new ArrayList<>();
+        mTags = new ArrayList<>();
 
         prefManager = new PrefManager(Dashboard.this);
 //        waitprg = (ProgressBar) findViewById(R.id.waitprogressbar);
@@ -112,7 +117,7 @@ public class Dashboard extends AppCompatActivity
         mRef.child("RoboISM Members Profile").child(mUid).child("tags").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mTags = (String[]) dataSnapshot.getValue();
+                mTags = (ArrayList<String>) dataSnapshot.getValue();
             }
 
             @Override
@@ -187,6 +192,28 @@ public class Dashboard extends AppCompatActivity
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println(databaseError.getMessage());
+            }
+        });
+
+        mFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView tvtit = (TextView) view.findViewById(R.id.ftxt_tv_title);
+                TextView tvbody = (TextView) view.findViewById(R.id.ftxt_tv_title);
+                TextView tvauthor = (TextView) view.findViewById(R.id.ftxt_tv_author);
+                TextView tvTags = (TextView) view.findViewById(R.id.ftxt_tv_tags);
+                ImageView iv = (ImageView) view.findViewById(R.id.feed_image);
+                Bundle b = new Bundle();
+                b.putString("title", tvtit.getText().toString());
+                b.putString("body", tvbody.getText().toString());
+                b.putString("author", tvauthor.getText().toString());
+                b.putString("tags", tvTags.getText().toString());
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                ((BitmapDrawable) iv.getDrawable()).getBitmap().compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                b.putByteArray("bitmap",byteArray);
+                Intent i  = new Intent(Dashboard.this, ViewPostActivity.class);
+                i.putExtra("bundle", b);
             }
         });
 

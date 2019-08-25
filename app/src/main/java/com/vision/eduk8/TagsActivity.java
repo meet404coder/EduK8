@@ -60,8 +60,8 @@ public class TagsActivity extends AppCompatActivity {
 
                 // Set tags
 
-                FirebaseDatabase.getInstance().getReference("Notes").child(
-                        FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Tags").setValue(tags);
+                FirebaseDatabase.getInstance().getReference(Config.MemberProfileRef).child(
+                        FirebaseAuth.getInstance().getCurrentUser().getUid()).child("tags").setValue(tags);
 
                 Intent intent = new Intent(TagsActivity.this, Dashboard.class);
                 startActivity(intent);
